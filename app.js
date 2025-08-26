@@ -113,18 +113,32 @@ closeCfg.addEventListener("click", () => {
 });
 
 saveCfg.addEventListener("click", () => {
+  // Cập nhật config
   config.text = cfgText.value || config.text;
   config.delay = parseInt(cfgDelay.value);
   config.color = cfgColor.value;
   config.audio = cfgAudio.value;
+
+  // Cập nhật URL để chia sẻ
+  const params = new URLSearchParams();
+  params.set("text", config.text);
+  params.set("delay", config.delay);
+  params.set("color", config.color);
+  if (config.audio) params.set("audio", config.audio);
+  if (config.name) params.set("name", config.name);
+
+  const newUrl = window.location.origin + window.location.pathname + "?" + params.toString();
+  window.history.replaceState({}, "", newUrl);
+
   modal.classList.add("hidden");
+  alert("Cấu hình đã lưu! Bạn có thể chia sẻ link.");
 });
 
 shareBtn.addEventListener("click", async () => {
-  const shareUrl = window.location.href; // Lấy URL hiện tại
+  const shareUrl = window.location.href; // URL đã chứa config mới
 
   if (navigator.share) {
-    // Web Share API (chạy trên mobile)
+    // Web Share API (mobile)
     try {
       await navigator.share({
         title: "Happy Birthday!",
@@ -136,7 +150,7 @@ shareBtn.addEventListener("click", async () => {
       console.error("Chia sẻ thất bại:", err);
     }
   } else {
-    // Desktop: copy link vào clipboard
+    // Desktop: copy link
     navigator.clipboard.writeText(shareUrl)
       .then(() => {
         alert("Link đã được sao chép: " + shareUrl);
