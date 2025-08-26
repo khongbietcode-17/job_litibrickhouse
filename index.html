@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday — Your Mini</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <div id="overlay">
+    <div id="countdown" class="hidden">3</div>
+    <div id="message" class="hidden">
+      <h1 id="happy">HAPPY BIRTHDAY!</h1>
+      <h2 id="name">Your Name</h2>
+      <img id="portrait" class="hidden" alt="portrait" />
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="playBtn">Play</button>
+    <button id="settingsBtn">⚙️</button>
+    <button id="shareBtn">Share</button>
+  </div>
+
+  <!-- Settings modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Cài đặt</h3>
+      <label>Chữ chính (dùng | để ngắt):</label>
+      <input id="cfgText" placeholder="HAPPY|BIRTHDAY|DEAR" />
+      <label>Thời gian đếm ngược (giây):</label>
+      <select id="cfgDelay"><option>3</option><option>5</option><option>10</option></select>
+      <label>Màu mưa chữ:</label>
+      <select id="cfgColor"><option value="#ff69b4">Hồng</option><option value="#00bfff">Xanh</option><option value="#b19cd9">Tím</option></select>
+      <label>Nhạc nền (URL):</label>
+      <input id="cfgAudio" placeholder="https://..." />
+      <div class="modal-actions">
+        <button id="saveCfg">Lưu</button>
+        <button id="closeCfg">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgAudio" loop crossorigin="anonymous"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
